@@ -258,12 +258,12 @@ data:
 
       - name: Builds
         rules:
-        - alert: JupyterHub image builds are failing
+        - alert: Jupyter image builds are failing
           annotations:
-            message: 'A JupyterHub image build is in a failed state.'
+            message: 'A Jupyter image build is in a failed state.'
             triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/spawner-greyed-images.md"
             build: "{{ $labels.buildconfig }}"
-            summary: JupyterHub image builds are failing
+            summary: Jupyter image builds are failing
           expr: |
             (
               clamp( 1 - sum by (buildconfig) (openshift_build_status_phase_total{build_phase=~"running",namespace="redhat-ods-applications"}),0,1)  # Do not alert if is a build currently running(this will make the left-hand side of the GT operator 0 and therefore always false)
