@@ -217,10 +217,8 @@ pagerduty_service_token=$(echo -ne "$pagerduty_service_token" | tr -d "'" | base
 oc apply -f monitoring/jupyterhub-route.yaml -n $ODH_PROJECT
 oc apply -f monitoring/rhods-dashboard-route.yaml -n $ODH_PROJECT
 
-jupyterhub_host=$(oc::wait::object::availability "oc get route jupyterhub -n $ODH_PROJECT -o jsonpath='{.spec.host}'" 2 30 | tr -d "'")
 rhods_dashboard_host=$(oc::wait::object::availability "oc get route rhods-dashboard -n $ODH_PROJECT -o jsonpath='{.spec.host}'" 2 30 | tr -d "'")
 
-sed -i "s/<jupyterhub_host>/$jupyterhub_host/g" monitoring/prometheus/prometheus-configs.yaml
 sed -i "s/<rhods_dashboard_host>/$rhods_dashboard_host/g" monitoring/prometheus/prometheus-configs.yaml
 sed -i "s/<pagerduty_token>/$pagerduty_service_token/g" monitoring/prometheus/prometheus-configs.yaml
 sed -i "s/<set_alertmanager_host>/$alertmanager_host/g" monitoring/prometheus/prometheus.yaml

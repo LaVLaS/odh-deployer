@@ -15,46 +15,6 @@ metadata:
 data:
   recording.rules: |
     groups:
-      - name: SLOs - JupyterHub
-        rules:
-        # The haproxy errors SLO for JupyterHub is disabled. Context at https://issues.redhat.com/browse/RHODS-2101
-
-        - expr: |
-            1 - avg_over_time(probe_success{instance=~"jupyterhub-.*", job="user_facing_endpoints_status"}[1d])
-          labels:
-            instance: jupyterhub
-          record: probe_success:burnrate1d
-        - expr: |
-            1 - avg_over_time(probe_success{instance=~"jupyterhub-.*", job="user_facing_endpoints_status"}[1h])
-          labels:
-            instance: jupyterhub
-          record: probe_success:burnrate1h
-        - expr: |
-            1 - avg_over_time(probe_success{instance=~"jupyterhub-.*", job="user_facing_endpoints_status"}[2h])
-          labels:
-            instance: jupyterhub
-          record: probe_success:burnrate2h
-        - expr: |
-            1 - avg_over_time(probe_success{instance=~"jupyterhub-.*", job="user_facing_endpoints_status"}[30m])
-          labels:
-            instance: jupyterhub
-          record: probe_success:burnrate30m
-        - expr: |
-            1 - avg_over_time(probe_success{instance=~"jupyterhub-.*", job="user_facing_endpoints_status"}[3d])
-          labels:
-            instance: jupyterhub
-          record: probe_success:burnrate3d
-        - expr: |
-            1 - avg_over_time(probe_success{instance=~"jupyterhub-.*", job="user_facing_endpoints_status"}[5m])
-          labels:
-            instance: jupyterhub
-          record: probe_success:burnrate5m
-        - expr: |
-            1 - avg_over_time(probe_success{instance=~"jupyterhub-.*", job="user_facing_endpoints_status"}[6h])
-          labels:
-            instance: jupyterhub
-          record: probe_success:burnrate6h
-
       - name: SLOs - ODH Dashboard
         rules:
         - expr: |
@@ -152,16 +112,9 @@ data:
             instance: rhods-controller
           record: controller_runtime_reconcile_total:rate15m
 
-      - name: Usage Metrics
-        rules:
-        - expr: max(jupyterhub_total_users)
-          labels:
-            instance: jupyterhub
-          record: rhods_total_users
-
       - name: Availability Metrics
         rules:
-        - expr: ((min(probe_success{instance=~"jupyterhub-redhat-ods-applications.*|rhods-dashboard-redhat-ods-applications.*"}) by (instance) or on() vector(0)) or label_replace(min(probe_success{instance=~"jupyterhub-redhat-ods-applications.*|rhods-dashboard-redhat-ods-applications.*"}), "instance", "combined", "instance", ".*"))
+        - expr: ((min(probe_success{instance=~"rhods-dashboard-redhat-ods-applications.*"}) by (instance) or on() vector(0)) or label_replace(min(probe_success{instance=~"rhods-dashboard-redhat-ods-applications.*"}), "instance", "combined", "instance", ".*"))
           record: rhods_aggregate_availability
 
   alerting.rules: |
@@ -254,54 +207,6 @@ data:
 
       - name: SLOs-probe_success
         rules:
-        - alert: RHODS JupyterHub Probe Success Burn Rate
-          annotations:
-            message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
-            summary: RHODS JupyterHub Probe Success Burn Rate
-          expr: |
-            sum(probe_success:burnrate5m{instance=~"jupyterhub|jupyterhub-db"}) by (instance) > (14.40 * (1-0.98000))
-            and
-            sum(probe_success:burnrate1h{instance=~"jupyterhub|jupyterhub-db"}) by (instance) > (14.40 * (1-0.98000))
-          for: 2m
-          labels:
-            severity: critical
-        - alert: RHODS JupyterHub Probe Success Burn Rate
-          annotations:
-            message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
-            summary: RHODS JupyterHub Probe Success Burn Rate
-          expr: |
-            sum(probe_success:burnrate30m{instance=~"jupyterhub|jupyterhub-db"}) by (instance) > (6.00 * (1-0.98000))
-            and
-            sum(probe_success:burnrate6h{instance=~"jupyterhub|jupyterhub-db"}) by (instance) > (6.00 * (1-0.98000))
-          for: 15m
-          labels:
-            severity: critical
-        - alert: RHODS JupyterHub Probe Success Burn Rate
-          annotations:
-            message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
-            summary: RHODS JupyterHub Probe Success Burn Rate
-          expr: |
-            sum(probe_success:burnrate2h{instance=~"jupyterhub|jupyterhub-db"}) by (instance) > (3.00 * (1-0.98000))
-            and
-            sum(probe_success:burnrate1d{instance=~"jupyterhub|jupyterhub-db"}) by (instance) > (3.00 * (1-0.98000))
-          for: 1h
-          labels:
-            severity: warning
-        - alert: RHODS JupyterHub Probe Success Burn Rate
-          annotations:
-            message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
-            summary: RHODS JupyterHub Probe Success Burn Rate
-          expr: |
-            sum(probe_success:burnrate6h{instance=~"jupyterhub|jupyterhub-db"}) by (instance) > (1.00 * (1-0.98000))
-            and
-            sum(probe_success:burnrate3d{instance=~"jupyterhub|jupyterhub-db"}) by (instance) > (1.00 * (1-0.98000))
-          for: 3h
-          labels:
-            severity: warning
         - alert: RHODS Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
@@ -441,26 +346,6 @@ data:
         - targets:
           - "prometheus-k8s.openshift-monitoring.svc.cluster.local:9091"
 
-    - job_name: 'JupyterHub Metrics'
-      honor_labels: true
-      metrics_path: /hub/metrics
-      scheme: http
-      bearer_token: <jupyterhub_prometheus_api_token>
-      kubernetes_sd_configs:
-        - role: endpoints
-          namespaces:
-            names:
-              - redhat-ods-applications
-      relabel_configs:
-        - source_labels: [__meta_kubernetes_service_name]
-          regex: ^(jupyterhub)$
-          target_label: kubernetes_name
-          action: keep
-        - source_labels: [__address__]
-          regex: (.+):(\d+)
-          target_label: __address__
-          replacement: ${1}:8081
-
     - job_name: 'user_facing_endpoints_status'
       scrape_interval: 10s
       metrics_path: /probe
@@ -473,7 +358,6 @@ data:
         credentials_file: /run/secrets/kubernetes.io/serviceaccount/token
       static_configs:
       - targets:
-        - <jupyterhub_host>
         - <rhods_dashboard_host>
       relabel_configs:
       - source_labels: [__address__]
