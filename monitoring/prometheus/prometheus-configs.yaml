@@ -111,6 +111,17 @@ data:
           labels:
             instance: rhods-controller
           record: controller_runtime_reconcile_total:rate15m
+    
+      - name: Usage Metrics
+        rules:
+        - expr: count(kube_persistentvolumeclaim_info{persistentvolumeclaim=~"jupyterhub-nb-.*",namespace=~"rhods-notebooks"})
+          record: rhods_total_users
+          labels:
+            instance: jupyter-notebooks
+        - expr: count(notebook_running)
+          record: rhods_active_users
+          labels:
+            instance: jupyter-notebooks
 
       - name: Availability Metrics
         rules:
