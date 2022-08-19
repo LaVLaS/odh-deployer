@@ -272,9 +272,9 @@ data:
             triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
             summary: RHODS Probe Success Burn Rate
           expr: |
-            sum(probe_success:burnrate5m{instance=~"rhods-dashboard"}) by (instance) > (14.40 * (1-0.99950))
+            sum(probe_success:burnrate5m{name=~"rhods-dashboard"}) by (name) > (14.40 * (1-0.99950))
             and
-            sum(probe_success:burnrate1h{instance=~"rhods-dashboard"}) by (instance) > (14.40 * (1-0.99950))
+            sum(probe_success:burnrate1h{name=~"rhods-dashboard"}) by (name) > (14.40 * (1-0.99950))
           for: 2m
           labels:
             severity: warning
@@ -284,9 +284,9 @@ data:
             triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
             summary: RHODS Probe Success Burn Rate
           expr: |
-            sum(probe_success:burnrate30m{instance=~"rhods-dashboard"}) by (instance) > (6.00 * (1-0.99950))
+            sum(probe_success:burnrate30m{name=~"rhods-dashboard"}) by (name) > (6.00 * (1-0.99950))
             and
-            sum(probe_success:burnrate6h{instance=~"rhods-dashboard"}) by (instance) > (6.00 * (1-0.99950))
+            sum(probe_success:burnrate6h{name=~"rhods-dashboard"}) by (name) > (6.00 * (1-0.99950))
           for: 15m
           labels:
             severity: warning
@@ -296,9 +296,9 @@ data:
             triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
             summary: RHODS Probe Success Burn Rate
           expr: |
-            sum(probe_success:burnrate2h{instance=~"rhods-dashboard"}) by (instance) > (3.00 * (1-0.99950))
+            sum(probe_success:burnrate2h{name=~"rhods-dashboard"}) by (name) > (3.00 * (1-0.99950))
             and
-            sum(probe_success:burnrate1d{instance=~"rhods-dashboard"}) by (instance) > (3.00 * (1-0.99950))
+            sum(probe_success:burnrate1d{name=~"rhods-dashboard"}) by (name) > (3.00 * (1-0.99950))
           for: 1h
           labels:
             severity: warning
@@ -308,9 +308,9 @@ data:
             triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
             summary: RHODS Probe Success Burn Rate
           expr: |
-            sum(probe_success:burnrate6h{instance=~"rhods-dashboard"}) by (instance) > (1.00 * (1-0.99950))
+            sum(probe_success:burnrate6h{name=~"rhods-dashboard"}) by (name) > (1.00 * (1-0.99950))
             and
-            sum(probe_success:burnrate3d{instance=~"rhods-dashboard"}) by (instance) > (1.00 * (1-0.99950))
+            sum(probe_success:burnrate3d{name=~"rhods-dashboard"}) by (name) > (1.00 * (1-0.99950))
           for: 3h
           labels:
             severity: warning
