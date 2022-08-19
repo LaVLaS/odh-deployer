@@ -125,7 +125,7 @@ data:
 
       - name: Availability Metrics
         rules:
-        - expr: ((min(probe_success{instance=~"rhods-dashboard-redhat-ods-applications.*"}) by (instance) or on() vector(0)) or label_replace(min(probe_success{instance=~"rhods-dashboard-redhat-ods-applications.*"}), "instance", "combined", "instance", ".*"))
+        - expr: ((min(probe_success{name=~"rhods-dashboard|notebook-spawner"}) by (name) or on() vector(0)) or label_replace(min(probe_success{name=~"rhods-dashboard|notebook-spawner"}), "name", "combined", "name", ".*"))
           record: rhods_aggregate_availability
 
   alerting.rules: |
