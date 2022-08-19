@@ -369,8 +369,12 @@ data:
       authorization:
         credentials_file: /run/secrets/kubernetes.io/serviceaccount/token
       static_configs:
-      - targets:
-        - <rhods_dashboard_host>
+      - targets: [<rhods_dashboard_host>]
+        labels:
+          name: rhods-dashboard
+      - targets: [<notebook_spawner_host>]
+        labels:
+          name: notebook-spawner
       relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
