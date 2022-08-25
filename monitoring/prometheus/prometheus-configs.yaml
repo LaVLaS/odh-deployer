@@ -221,7 +221,7 @@ data:
         - alert: RHODS Jupyter Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/rhods-jupyter-probe-success-burn-rate.md"
             summary: RHODS Jupyter Probe Success Burn Rate
           expr: |
             sum(probe_success:burnrate5m{name=~"notebook-spawner"}) by (name) > (14.40 * (1-0.98000))
@@ -233,7 +233,7 @@ data:
         - alert: RHODS Jupyter Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/rhods-jupyter-probe-success-burn-rate.md"
             summary: RHODS Jupyter Probe Success Burn Rate
           expr: |
             sum(probe_success:burnrate30m{name=~"notebook-spawner"}) by (name) > (6.00 * (1-0.98000))
@@ -245,7 +245,7 @@ data:
         - alert: RHODS Jupyter Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/rhods-jupyter-probe-success-burn-rate.md"
             summary: RHODS Jupyter Probe Success Burn Rate
           expr: |
             sum(probe_success:burnrate2h{name=~"notebook-spawner"}) by (name) > (3.00 * (1-0.98000))
@@ -257,7 +257,7 @@ data:
         - alert: RHODS Jupyter Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/rhods-jupyter-probe-success-burn-rate.md"
             summary: RHODS Jupyter Probe Success Burn Rate
           expr: |
             sum(probe_success:burnrate6h{name=~"notebook-spawner"}) by (name) > (1.00 * (1-0.98000))
@@ -269,7 +269,7 @@ data:
         - alert: RHODS Dashboard Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/rhods-dashboard-probe-success-burn-rate.md"
             summary: RHODS Dashboard Probe Success Burn Rate
           expr: |
             sum(probe_success:burnrate5m{name=~"rhods-dashboard"}) by (name) > (14.40 * (1-0.99950))
@@ -281,7 +281,7 @@ data:
         - alert: RHODS Dashboard Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/rhods-dashboard-probe-success-burn-rate.md"
             summary: RHODS Dashboard Probe Success Burn Rate
           expr: |
             sum(probe_success:burnrate30m{name=~"rhods-dashboard"}) by (name) > (6.00 * (1-0.99950))
@@ -293,7 +293,7 @@ data:
         - alert: RHODS Dashboard Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/rhods-dashboard-probe-success-burn-rate.md"
             summary: RHODS Dashboard Probe Success Burn Rate
           expr: |
             sum(probe_success:burnrate2h{name=~"rhods-dashboard"}) by (name) > (3.00 * (1-0.99950))
@@ -305,7 +305,7 @@ data:
         - alert: RHODS Dashboard Probe Success Burn Rate
           annotations:
             message: 'High error budget burn for {{ $labels.instance }} (current value: {{ $value }}).'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/rhods-probe-success-burn-rate.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/rhods-dashboard-probe-success-burn-rate.md"
             summary: RHODS Dashboard Probe Success Burn Rate
           expr: |
             sum(probe_success:burnrate6h{name=~"rhods-dashboard"}) by (name) > (1.00 * (1-0.99950))
@@ -320,7 +320,7 @@ data:
         - alert: Jupyter image builds are failing
           annotations:
             message: 'A Jupyter image build is in a failed state.'
-            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/JupyterHub/spawner-greyed-images.md"
+            triage: "https://gitlab.cee.redhat.com/service/managed-tenants-sops/-/blob/main/RHODS/Jupyter/spawner-greyed-images.md"
             build: "{{ $labels.buildconfig }}"
             summary: Jupyter image builds are failing
           expr: |
